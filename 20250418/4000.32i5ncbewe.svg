@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1175 500" width="1175" height="500">
+  <!-- 背景渐变 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2a6c" />
+      <stop offset="50%" stop-color="#2d42a7" />
+      <stop offset="100%" stop-color="#2e3f7c" />
+    </linearGradient>
+    
+    <!-- 沙漏形状 -->
+    <clipPath id="hourglassClip">
+      <path d="M587.5,130 C587.5,130 537.5,200 537.5,250 C537.5,300 637.5,300 637.5,250 C637.5,200 587.5,130 587.5,130 Z" />
+    </clipPath>
+    
+    <clipPath id="hourglassLowerClip">
+      <path d="M587.5,370 C587.5,370 537.5,300 537.5,250 C537.5,200 637.5,200 637.5,250 C637.5,300 587.5,370 587.5,370 Z" />
+    </clipPath>
+    
+    <!-- 星空效果 -->
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+  
+  <!-- 星空背景 -->
+  <g id="stars">
+    <!-- 生成100颗随机分布的星星 -->
+    <script type="text/javascript">
+      <![CDATA[
+      for(let i=0; i<100; i++) {
+        const x = Math.random() * 1175;
+        const y = Math.random() * 500;
+        const size = Math.random() * 2 + 0.5;
+        const opacity = Math.random() * 0.7 + 0.3;
+        document.write(`<circle cx="${x}" cy="${y}" r="${size}" fill="white" opacity="${opacity}" />`);
+        
+        // 添加一些星光效果
+        if(Math.random() > 0.7) {
+          document.write(`<circle cx="${x}" cy="${y}" r="${size*3}" fill="url(#starGlow)" opacity="0.3" />`);
+        }
+      }
+      ]]>
+    </script>
+  </g>
+  
+  <!-- 沙漏框架 -->
+  <g id="hourglass" transform="translate(0, 0)">
+    <path d="M587.5,130 L637.5,130 C637.5,130 637.5,130 637.5,130 C637.5,200 637.5,200 637.5,250 C637.5,300 637.5,300 637.5,370 L537.5,370 C537.5,370 537.5,370 537.5,370 C537.5,300 537.5,300 537.5,250 C537.5,200 537.5,200 537.5,130 Z" fill="none" stroke="#f5f5f5" stroke-width="3" />
+    
+    <!-- 沙漏上半部分的沙子 -->
+    <rect x="537.5" y="130" width="100" height="120" fill="#f2d399" clip-path="url(#hourglassClip)" opacity="0.7">
+      <animate attributeName="height" from="120" to="0" dur="8s" repeatCount="indefinite" />
+    </rect>
+    
+    <!-- 沙漏下半部分的沙子 -->
+    <rect x="537.5" y="250" width="100" height="0" fill="#f2d399" clip-path="url(#hourglassLowerClip)" opacity="0.7">
+      <animate attributeName="height" from="0" to="120" dur="8s" repeatCount="indefinite" />
+    </rect>
+  </g>
+  
+  <!-- 数字4000的视觉表现 -->
+  <g id="weeks">
+    <!-- 创建代表4000周的小点 -->
+    <script type="text/javascript">
+      <![CDATA[
+      const radius = 180;
+      const centerX = 587.5;
+      const centerY = 250;
+      const total = 400; // 用400个点来象征性表示4000周
+      
+      for(let i=0; i<total; i++) {
+        const angle = (i / total) * Math.PI * 2;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        const size = Math.random() * 1.5 + 0.8;
+        const opacity = Math.random() * 0.5 + 0.5;
+        
+        document.write(`<circle cx="${x}" cy="${y}" r="${size}" fill="#fff" opacity="${opacity}">
+          <animate attributeName="opacity" values="${opacity};0.2;${opacity}" dur="${3+Math.random()*5}s" repeatCount="indefinite" />
+        </circle>`);
+      }
+      ]]>
+    </script>
+  </g>
+  
+  <!-- 标题文字 -->
+  <g id="title">
+    <text x="587.5" y="110" font-family="'Microsoft YaHei', sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">四千周人生</text>
+    <text x="587.5" y="160" font-family="'Microsoft YaHei', sans-serif" font-size="24" text-anchor="middle" fill="#e0e0e0">如何在有限时间里活出无限价值</text>
+    
+    <!-- 装饰线 -->
+    <line x1="437.5" y1="410" x2="737.5" y2="410" stroke="#ffffff" stroke-width="2" />
+    <text x="587.5" y="440" font-family="'Microsoft YaHei', sans-serif" font-size="20" text-anchor="middle" fill="#f2d399">时间有限，选择无限</text>
+  </g>
+  
+  <!-- 装饰元素 -->
+  <g id="decorations">
+    <circle cx="587.5" cy="250" r="210" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.3" />
+    <circle cx="587.5" cy="250" r="200" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.2" />
+    
+    <!-- 时间刻度标记 -->
+    <script type="text/javascript">
+      <![CDATA[
+      const markRadius = 230;
+      const markCount = 24;
+      
+      for(let i=0; i<markCount; i++) {
+        const angle = (i / markCount) * Math.PI * 2;
+        const outerX = centerX + Math.cos(angle) * markRadius;
+        const outerY = centerY + Math.sin(angle) * markRadius;
+        const innerX = centerX + Math.cos(angle) * (markRadius - 10);
+        const innerY = centerY + Math.sin(angle) * (markRadius - 10);
+        
+        document.write(`<line x1="${outerX}" y1="${outerY}" x2="${innerX}" y2="${innerY}" stroke="#ffffff" stroke-width="2" opacity="0.6" />`);
+      }
+      ]]>
+    </script>
+  </g>
+</svg>
